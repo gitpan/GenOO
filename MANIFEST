@@ -5,6 +5,13 @@ META.yml
 Makefile.PL
 README.md
 cookbook/01-Introduction.md
+cookbook/02-Quick_Start.md
+cookbook/03-Gene_Models.md
+cookbook/04-Collections.md
+cookbook/05-Input_Output.md
+cookbook/06-Recipes.md
+cookbook/07-Plugins_And_Extensions.md
+cookbook/08-Test_Suite.md
 dist.ini
 lib/GenOO.pm
 lib/GenOO/Data/DB/Connector.pm
