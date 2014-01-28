@@ -37,4 +37,4 @@ requires:
   autodie: 0
   namespace::autoclean: 0
   strict: 0
-version: 1.4.1
+version: 1.4.2
