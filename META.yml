@@ -10,10 +10,6 @@ build_requires:
   Test::Class::Moose::Load: 0
   Test::Class::Moose::Role::AutoUse: 0
   Test::Exception: 0
-  Test::GenOO: 0
-  Test::GenOO::GenomicRegion: 0
-  Test::GenOO::Transcript::Part: 0
-  Test::GenOO::TranscriptCollection::Factory: 0
   Test::Moose: 0
   Test::More: 0
   Test::Most: 0
