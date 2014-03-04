@@ -13,7 +13,7 @@ GenOO::RegionCollection::Factory::Requires - Role for a concrete factory that cr
 # Let the code begin...
 
 package GenOO::RegionCollection::Factory::Requires;
-
+$GenOO::RegionCollection::Factory::Requires::VERSION = '1.4.4';
 use Moose::Role;
 
 requires 'read_collection';

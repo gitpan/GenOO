@@ -34,7 +34,7 @@ GenOO::Data::File::GFF - Object implementing methods for accessing GFF formatted
 
 
 package GenOO::Data::File::GFF;
-
+$GenOO::Data::File::GFF::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

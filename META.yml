@@ -37,5 +37,7 @@ requires:
   namespace::autoclean: '0'
   strict: '0'
 resources:
-  repository: git://github.com/genoo/GenOO.git
-version: 1.4.3
+  bugtracker: https://github.com/genoo/GenOO/issues
+  homepage: https://github.com/genoo/GenOO
+  repository: https://github.com/genoo/GenOO.git
+version: 1.4.4

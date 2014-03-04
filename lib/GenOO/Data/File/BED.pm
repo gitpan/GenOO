@@ -33,7 +33,7 @@ GenOO::Data::File::BED - Object implementing methods for accessing bed formatted
 # Let the code begin...
 
 package GenOO::Data::File::BED;
-
+$GenOO::Data::File::BED::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

@@ -35,7 +35,7 @@ GenOO::Data::File::FASTA - Object implementing methods for accessing fasta forma
 # Let the code begin...
 
 package GenOO::Data::File::FASTA;
-
+$GenOO::Data::File::FASTA::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

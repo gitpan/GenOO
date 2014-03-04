@@ -32,7 +32,7 @@ GenOO::TranscriptCollection::Factory - Factory for creating L<GenOO::TranscriptC
 # Let the code begin...
 
 package GenOO::TranscriptCollection::Factory;
-
+$GenOO::TranscriptCollection::Factory::VERSION = '1.4.4';
 use MooseX::AbstractFactory;
 
 # Role that the implementations should implement

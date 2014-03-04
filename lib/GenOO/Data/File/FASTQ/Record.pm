@@ -31,7 +31,7 @@ GenOO::Data::File::FASTQ::Record - Object representing a record of a fastq file
 # Let the code begin...
 
 package GenOO::Data::File::FASTQ::Record;
-
+$GenOO::Data::File::FASTQ::Record::VERSION = '1.4.4';
 use Moose;
 use namespace::autoclean;
 

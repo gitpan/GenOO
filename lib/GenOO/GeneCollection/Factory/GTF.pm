@@ -39,7 +39,7 @@ Preferably use it through the generic GenOO::GeneCollection::Factory
 # Let the code begin...
 
 package GenOO::GeneCollection::Factory::GTF;
-
+$GenOO::GeneCollection::Factory::GTF::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

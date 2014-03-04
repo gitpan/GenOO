@@ -48,7 +48,7 @@ GenOO::RegionCollection::Factory::DB - Factory for creating GenOO::RegionCollect
 # Let the code begin...
 
 package GenOO::RegionCollection::Factory::DBIC;
-
+$GenOO::RegionCollection::Factory::DBIC::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

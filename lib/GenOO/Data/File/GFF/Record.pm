@@ -40,7 +40,7 @@ GenOO::Data::File::GFF::Record - Object representing a record of a gff file
 
 
 package GenOO::Data::File::GFF::Record;
-
+$GenOO::Data::File::GFF::Record::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

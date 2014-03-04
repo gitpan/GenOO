@@ -41,7 +41,7 @@ GenOO::Transcript::Part - A functional region within a transcript consisting of 
 # Let the code begin...
 
 package GenOO::Transcript::Part;
-
+$GenOO::Transcript::Part::VERSION = '1.4.4';
 use Moose;
 use namespace::autoclean;
 

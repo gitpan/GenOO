@@ -27,11 +27,17 @@ GenOO::Helper::MyMath - A collection of useful mathematical methods
 # Let the code begin...
 
 package GenOO::Helper::MyMath;
+$GenOO::Helper::MyMath::VERSION = '1.4.4';
 
-use strict;
+#######################################################################
+#######################   Load External modules   #####################
+#######################################################################
+use Modern::Perl;
 
-our $VERSION = '1.0';
 
+#######################################################################
+#######################   Interface Functions   #######################
+#######################################################################
 sub mean {
 # Calculates the mean of the values in an array
 	my ($array_ref) = @_;

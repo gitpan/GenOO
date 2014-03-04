@@ -42,7 +42,7 @@ GenOO::Intron - Intron object
 # Let the code begin...
 
 package GenOO::Intron;
-
+$GenOO::Intron::VERSION = '1.4.4';
 use Moose;
 use namespace::autoclean;
 

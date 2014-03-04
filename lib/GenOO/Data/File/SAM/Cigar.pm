@@ -46,7 +46,7 @@ GenOO::Data::File::SAM::Cigar - Role that corresponds to the SAM file CIGAR stri
 # Let the code begin...
 
 package GenOO::Data::File::SAM::Cigar;
-
+$GenOO::Data::File::SAM::Cigar::VERSION = '1.4.4';
 
 #######################################################################
 #######################   Load External modules   #####################

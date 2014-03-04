@@ -14,7 +14,7 @@ GenOO::Data::DB::DBIC::Species::Schema::Result::Draft - Draft DBIx::Class result
 # Let the code begin...
 
 package GenOO::Data::DB::DBIC::Species::Schema::Result::Draft;
-
+$GenOO::Data::DB::DBIC::Species::Schema::Result::Draft::VERSION = '1.4.4';
 use Modern::Perl;
 use Moose;
 use namespace::autoclean;
