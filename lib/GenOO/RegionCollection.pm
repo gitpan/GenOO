@@ -20,7 +20,7 @@ GenOO::RegionCollection - Role for a collection of GenOO::Region objects
 # Let the code begin...
 
 package GenOO::RegionCollection;
-$GenOO::RegionCollection::VERSION = '1.4.4';
+$GenOO::RegionCollection::VERSION = '1.4.5';
 use Moose::Role;
 use namespace::autoclean;
 use GenOO::RegionCollection::Factory;

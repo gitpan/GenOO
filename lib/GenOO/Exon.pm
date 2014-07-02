@@ -42,7 +42,7 @@ GenOO::Exon - Exon object
 # Let the code begin...
 
 package GenOO::Exon;
-$GenOO::Exon::VERSION = '1.4.4';
+$GenOO::Exon::VERSION = '1.4.5';
 use Moose;
 use namespace::autoclean;
 

@@ -39,7 +39,7 @@ Preferably use it through the generic GenOO::GeneCollection::Factory
 # Let the code begin...
 
 package GenOO::GeneCollection::Factory::GTF;
-$GenOO::GeneCollection::Factory::GTF::VERSION = '1.4.4';
+$GenOO::GeneCollection::Factory::GTF::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################
@@ -123,14 +123,43 @@ sub _read_gtf {
 				splice_stops  => [$record->stop], # will be re-written later
 			);
 			$transcripts{$transcript_id} = $transcript;
-			if (!exists $genes{$gene_id}){
+			my $uniq_gene_id = join("",($gene_id,$record->rname,$record->strand));
+			if (!exists $genes{$uniq_gene_id}){
 				my $gene = GenOO::Gene->new(name => $gene_id);
-				$genes{$gene_id} = $gene;
+				$genes{$uniq_gene_id}{'1'} = $gene;
+				$transcript->gene($genes{$uniq_gene_id}{'1'});
+				$genes{$uniq_gene_id}{'1'}->add_transcript($transcript);
+				$transcript_splice_starts{$transcript_id} = [];
+				$transcript_splice_stops{$transcript_id} = [];
 			}
-			$transcript->gene($genes{$gene_id});
-			$genes{$gene_id}->add_transcript($transcript);
-			$transcript_splice_starts{$transcript_id} = [];
-			$transcript_splice_stops{$transcript_id} = [];
+			else{
+				my $found = 0;
+				my $i = 0;
+				foreach my $index (keys %{$genes{$uniq_gene_id}}){
+					$i = $index;
+					my $gene = $genes{$uniq_gene_id}{$index};
+					if ($gene->contains_position($record->start,0)){
+						$found = 1;
+						$transcript->gene($genes{$uniq_gene_id}{$index});
+						$genes{$uniq_gene_id}{$index}->add_transcript($transcript);
+						$transcript_splice_starts{$transcript_id} = [];
+						$transcript_splice_stops{$transcript_id} = [];
+						last;
+					}
+				
+				}
+				if ($found == 0){
+					my $index = $i+1;
+					my $gene = GenOO::Gene->new(name => $gene_id);
+					$genes{$uniq_gene_id}{$index} = $gene;
+					$transcript->gene($genes{$uniq_gene_id}{$index});
+					$genes{$uniq_gene_id}{$index}->add_transcript($transcript);
+					$transcript_splice_starts{$transcript_id} = [];
+					$transcript_splice_stops{$transcript_id} = [];
+				}
+			}
+			
+			
 		}
 		else {
 			if ($record->start < $transcript->start) {
@@ -146,18 +175,18 @@ sub _read_gtf {
 			push @{$transcript_splice_stops{$transcript_id}}, $record->stop;
 		}
 		elsif ($record->feature eq 'start_codon') {
-			if ($record->strand eq '+') {
+			if ($record->strand == 1) {
 				$transcript->coding_start($record->start);
 			}
-			elsif ($record->strand eq '-') {
+			elsif ($record->strand == -1) {
 				$transcript->coding_stop($record->stop);
 			}
 		}
 		elsif ($record->feature eq 'stop_codon') {
-			if ($record->strand eq '+') {
+			if ($record->strand == 1) {
 				$transcript->coding_stop($record->stop);
 			}
-			elsif ($record->strand eq '-') {
+			elsif ($record->strand == -1) {
 				$transcript->coding_start($record->start);
 			}
 		}
@@ -167,7 +196,13 @@ sub _read_gtf {
 		$transcripts{$transcript_id}->set_splice_starts_and_stops($transcript_splice_starts{$transcript_id}, $transcript_splice_stops{$transcript_id});
 	}
 	
-	return values %genes;
+	my @outgenes;
+	foreach my $name (keys %genes){
+		foreach my $index (keys %{$genes{$name}}){
+			push @outgenes, $genes{$name}{$index};
+		}
+	}
+	return @outgenes;
 }
 
 1;

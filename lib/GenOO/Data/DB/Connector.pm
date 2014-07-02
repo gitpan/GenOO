@@ -30,7 +30,7 @@ GenOO::DB::Connector - Connector to database object, with features
 # Let the code begin...
 
 package GenOO::Data::DB::Connector;
-$GenOO::Data::DB::Connector::VERSION = '1.4.4';
+$GenOO::Data::DB::Connector::VERSION = '1.4.5';
 use Moose;
 use namespace::autoclean;
 

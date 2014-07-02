@@ -27,7 +27,7 @@ GenOO::Helper::MyMath - A collection of useful mathematical methods
 # Let the code begin...
 
 package GenOO::Helper::MyMath;
-$GenOO::Helper::MyMath::VERSION = '1.4.4';
+$GenOO::Helper::MyMath::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################

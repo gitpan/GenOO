@@ -4,7 +4,7 @@
       "Emmanouil \"Manolis\" Maragkakis <mns.marag@gmail.com>, Panagiotis Alexiou <pan.alexiou@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.013, CPAN::Meta::Converter version 2.133380",
+   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -24,7 +24,6 @@
             "DBI" : "0",
             "DBIx::Class::Core" : "0",
             "DBIx::Class::Schema" : "0",
-            "IO::Zlib" : "0",
             "Modern::Perl" : "0",
             "Moose" : "0",
             "Moose::Role" : "0",
@@ -63,6 +62,6 @@
          "web" : "https://github.com/genoo/GenOO"
       }
    },
-   "version" : "1.4.4"
+   "version" : "1.4.5"
 }
 

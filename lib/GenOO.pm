@@ -76,7 +76,7 @@ GenOO - A Modern Perl Framework for High Throughput Sequencing analysis
 
 
 package GenOO;
-$GenOO::VERSION = '1.4.4';
+$GenOO::VERSION = '1.4.5';
 use Modern::Perl;
 
 1;

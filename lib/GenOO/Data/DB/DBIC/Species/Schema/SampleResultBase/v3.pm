@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v2 - DBIC Result class for sequenced reads
+GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v3 - DBIC Result class for sequenced reads
 
 =head1 SYNOPSIS
 
@@ -11,6 +11,7 @@ GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v2 - DBIC Result class
     # by an actual result class to provide a common column structure.
     
     # Offers more columns than GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v1
+    # Is the same as v2 adding an autoincrementing id column
     
 =head1 DESCRIPTION
 
@@ -34,8 +35,8 @@ GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v2 - DBIC Result class
 
 # Let the code begin...
 
-package GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v2;
-$GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v2::VERSION = '1.4.5';
+package GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v3;
+$GenOO::Data::DB::DBIC::Species::Schema::SampleResultBase::v3::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################
@@ -138,6 +139,12 @@ sub sequence_length {
 __PACKAGE__->table('Unknown');
 
 __PACKAGE__->add_columns(
+	'id', {
+		data_type => 'integer',
+		extra => { unsigned => 1 },
+		is_nullable => 0,
+		size => 9
+	},
 	'strand', {
 		data_type => 'integer',
 		is_nullable => 0,
@@ -196,7 +203,7 @@ __PACKAGE__->add_columns(
 	},
 );
 
-
+__PACKAGE__->set_primary_key('id');
 #######################################################################
 ############################   Finalize   #############################
 #######################################################################

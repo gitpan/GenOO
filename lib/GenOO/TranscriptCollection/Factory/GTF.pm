@@ -39,7 +39,7 @@ Preferably use it through the generic GenOO::TranscriptCollection::Factory
 # Let the code begin...
 
 package GenOO::TranscriptCollection::Factory::GTF;
-$GenOO::TranscriptCollection::Factory::GTF::VERSION = '1.4.4';
+$GenOO::TranscriptCollection::Factory::GTF::VERSION = '1.4.5';
 #######################################################################
 #######################   Load External modules   #####################
 #######################################################################
@@ -133,18 +133,18 @@ sub _read_gtf_with_transcripts {
 			push @{$transcript_splice_stops{$transcript_id}}, $record->stop;
 		}
 		elsif ($record->feature eq 'start_codon') {
-			if ($record->strand eq '+') {
+			if ($record->strand == 1) {
 				$transcript->coding_start($record->start);
 			}
-			elsif ($record->strand eq '-') {
+			elsif ($record->strand == -1) {
 				$transcript->coding_stop($record->stop);
 			}
 		}
 		elsif ($record->feature eq 'stop_codon') {
-			if ($record->strand eq '+') {
+			if ($record->strand == 1) {
 				$transcript->coding_stop($record->stop);
 			}
-			elsif ($record->strand eq '-') {
+			elsif ($record->strand == -1) {
 				$transcript->coding_start($record->start);
 			}
 		}

@@ -46,7 +46,7 @@ GenOO::RegionCollection::Type::DBIC - Class for a collection of GenOO::Region ob
 # Let the code begin...
 
 package GenOO::RegionCollection::Type::DBIC;
-$GenOO::RegionCollection::Type::DBIC::VERSION = '1.4.4';
+$GenOO::RegionCollection::Type::DBIC::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################
@@ -152,6 +152,17 @@ sub foreach_record_do {
 	my ($self, $block) = @_;
 	
 	while (my $record = $self->resultset->next) {
+		last if $block->($record) eq 'break_loop'; # break the loop if the routine returns 'break_loop'
+	}
+}
+
+sub foreach_record_sorted_by_location_do {
+	my ($self, $block) = @_;
+	
+	my $rs = $self->resultset->search({}, {
+		order_by => { -asc => ['strand', 'rname', 'start']},
+	});
+	while (my $record = $rs->next) {
 		last if $block->($record) eq 'break_loop'; # break the loop if the routine returns 'break_loop'
 	}
 }

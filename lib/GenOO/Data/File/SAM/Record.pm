@@ -37,7 +37,7 @@ GenOO::Data::File::SAM::Record - Object representing a record of a sam file
 # Let the code begin...
 
 package GenOO::Data::File::SAM::Record;
-$GenOO::Data::File::SAM::Record::VERSION = '1.4.4';
+$GenOO::Data::File::SAM::Record::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################

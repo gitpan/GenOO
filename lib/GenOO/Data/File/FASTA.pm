@@ -6,7 +6,7 @@ GenOO::Data::File::FASTA - Object implementing methods for accessing fasta forma
 
 =head1 SYNOPSIS
 
-    # Object that manages a fasta file. 
+    # Object that manages a fasta file.
 
     # To initialize
     my $fasta_parser = GenOO::Data::File::FASTA->new(
@@ -23,10 +23,10 @@ GenOO::Data::File::FASTA - Object implementing methods for accessing fasta forma
     my $fasta_parser = GenOO::Data::File::FASTA->new(
           file => 't/sample_data/sample.fasta.gz'
     );
-    
+
     # Read one record at a time
     my $record = $fasta_parser->next_record;
-    
+
     # Get the number of records read
     my $count = $fasta_parser->records_read_count;
 
@@ -35,7 +35,7 @@ GenOO::Data::File::FASTA - Object implementing methods for accessing fasta forma
 # Let the code begin...
 
 package GenOO::Data::File::FASTA;
-$GenOO::Data::File::FASTA::VERSION = '1.4.4';
+$GenOO::Data::File::FASTA::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################
@@ -44,7 +44,6 @@ use Modern::Perl;
 use autodie;
 use Moose;
 use namespace::autoclean;
-use IO::Zlib;
 
 
 #######################################################################
@@ -82,12 +81,18 @@ has '_stored_record_header' => (
 	init_arg  => undef,
 );
 
-has '_stored_record_sequence' => (
-	is        => 'rw',
-	clearer   => '_clear_stored_record_sequence',
-	predicate => '_has_stored_record_sequence',
-	init_arg  => undef,
-);
+has '_stored_record_sequence_parts' => (
+        traits  => ['Array'],
+        is      => 'rw',
+        isa     => 'ArrayRef[Str]',
+        default => sub { [] },
+        handles => {
+            _all_record_sequence_parts    => 'elements',
+            _add_record_sequence_part     => 'push',
+            _join_record_sequence_parts   => 'join',
+            _clear_record_sequence_parts  => 'clear',
+        },
+    );
 
 has '_eof' => (
 	is        => 'rw',
@@ -101,9 +106,9 @@ has '_eof' => (
 #######################################################################
 sub next_record {
 	my ($self) = @_;
-	
+
 	return undef if ($self->_reached_eof);
-	
+
 	while (my $line = $self->_filehandle->getline) {
 		chomp $line;
 		if (_line_looks_like_record_header($line)) {
@@ -117,7 +122,7 @@ sub next_record {
 			}
 		}
 		elsif (_line_looks_like_sequence($line)) {
-			$self->_concatenate_to_stored_record_sequence($line);
+			$self->_add_record_sequence_part($line);
 		}
 	}
 	$self->_eof(1);
@@ -129,31 +134,21 @@ sub next_record {
 #######################################################################
 sub _open_filehandle {
 	my ($self) = @_;
-	
+
 	my $read_mode;
 	my $HANDLE;
 	if (!defined $self->file) {
 		open ($HANDLE, '<-', $self->file);
 	}
 	elsif ($self->file =~ /\.gz$/) {
-		$HANDLE = IO::Zlib->new($self->file, 'rb') or die "Cannot open file ".$self->file."\n";
+		die 'Cannot open file ' . $self->file . "\n" if ! -e $self->file;
+		open($HANDLE, 'gzip -dc ' . $self->file . ' |');
 	}
 	else {
 		open ($HANDLE, '<', $self->file);
 	}
-	
-	return $HANDLE;
-}
 
-sub _concatenate_to_stored_record_sequence {
-	my ($self) = @_;
-	
-	if ($self->_has_stored_record_sequence) {
-		$self->_stored_record_sequence($self->_stored_record_sequence.$_[1]);
-	}
-	else {
-		$self->_stored_record_sequence($_[1]);
-	}
+	return $HANDLE;
 }
 
 sub _increment_records_read_count {
@@ -163,15 +158,15 @@ sub _increment_records_read_count {
 
 sub _create_record {
 	my ($self) = @_;
-	
+
 	my $record = GenOO::Data::File::FASTA::Record->new(
 		header   => $self->_stored_record_header,
-		sequence => $self->_stored_record_sequence,
+		sequence => $self->_join_record_sequence_parts(''),
 	);
 	$self->_clear_stored_record_header;
-	$self->_clear_stored_record_sequence;
+	$self->_clear_record_sequence_parts;
 	$self->_increment_records_read_count;
-	
+
 	return $record;
 }
 

@@ -37,7 +37,7 @@ GenOO::Data::DB::DBIC::Species::Schema - Schema object
 # Let the code begin...
 
 package GenOO::Data::DB::DBIC::Species::Schema;
-$GenOO::Data::DB::DBIC::Species::Schema::VERSION = '1.4.4';
+$GenOO::Data::DB::DBIC::Species::Schema::VERSION = '1.4.5';
 
 #######################################################################
 #######################   Load External modules   #####################

@@ -35,7 +35,7 @@ GenOO::Transcript::UTR3 - Transcript part (coding sequence)
 # Let the code begin...
 
 package GenOO::Transcript::UTR3;
-$GenOO::Transcript::UTR3::VERSION = '1.4.4';
+$GenOO::Transcript::UTR3::VERSION = '1.4.5';
 use Moose;
 use namespace::autoclean;
 
